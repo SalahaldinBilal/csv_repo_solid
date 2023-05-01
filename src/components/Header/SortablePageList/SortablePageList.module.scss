@@ -1,0 +1,47 @@
+.TorrentContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .TorrentList {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+
+    &>*:not(:last-child) {
+      border-bottom: solid 1px #1c1924
+    }
+  }
+
+  .Torrent {
+    width: 100%;
+    display: flex;
+    background-color: #1e1d1d98;
+
+    &>* {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5px;
+
+      &:not(:last-child) {
+        border-right: solid 1px #1c1924;
+      }
+    }
+
+    .TorrentName {
+      width: 80%;
+    }
+
+    .TorrentProgress {
+      width: 10%;
+    }
+
+    .TorrentTimeRemaining {
+      width: 10%;
+    }
+  }
+}

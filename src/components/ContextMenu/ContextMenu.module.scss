@@ -1,0 +1,33 @@
+.Container {
+  position: fixed;
+  background-color: #262626;
+  box-sizing: border-box;
+  box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  padding: 6px 0;
+  min-width: 200px;
+  z-index: 10000;
+  overflow-y: auto;
+
+  &.StartState {
+    opacity: 0;
+  }
+
+  &.EnterAnimation {
+    animation: appear 0.15s;
+  }
+
+  &.EndAnimation {
+    animation: appear 0.15s reverse;
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,39 @@
+.Legend {
+  display: inline-flex;
+  position: relative;
+  margin: 0;
+  margin-top: 20px;
+  padding: 0;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  // transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+  &.Focused {
+    border-color: var(--border-color-focused);
+
+    .ListSeparator {
+      border-color: var(--border-color-focused);
+    }
+  }
+
+  .Title {
+    position: relative;
+    z-index: 999;
+    // pointer-events: none;
+    line-height: 0;
+    margin-left: 10px;
+    transform: translateY(0px);
+    font-size: 14px;
+    color: var(--color);
+    display: flex;
+  }
+
+  .ListSeparator {
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+    width: 1px;
+    // height: 100%;
+    border-right: 1px solid var(--border-color);
+  }
+}

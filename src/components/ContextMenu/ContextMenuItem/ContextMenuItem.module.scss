@@ -1,0 +1,19 @@
+.Container {
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  position: relative;
+  transition: background-color 0.2s;
+  cursor: pointer;
+  user-select: none;
+  font-size: 14px;
+
+  &:hover {
+    background-color: #474747;
+  }
+
+  .Icon {
+    margin-right: 15px;
+  }
+}
