@@ -4,10 +4,11 @@ import MenuIcon from '@suid/icons-material/Menu';
 import QuitIcon from '@suid/icons-material/PowerSettingsNew';
 import { createSignal, For, onMount, Show } from "solid-js";
 import SortablePageList from "./SortablePageList/SortablePageList";
+import userData from "../../states/userData";
 
 function Header() {
   const [showDrawer, setShowDraw] = createSignal(false);
-  const [isFullscreen, setIsFullscreen] = createSignal(false);
+  const { data, signOut } = userData;
   const navBarHeight = 36;
 
   const toggleDrawer = () => setShowDraw(show => !show)
@@ -58,6 +59,12 @@ function Header() {
             >
               <MenuIcon />
             </Button>
+            <Show when={data.loggedIn} fallback={<div>Please login or sign up</div>}>
+              <div>Hello {data.username}</div>
+            </Show>
+            <Show when={data.loggedIn}>
+              <Button onClick={signOut}>Sign out</Button>
+            </Show>
           </Toolbar>
         </AppBar>
       </Box>

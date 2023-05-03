@@ -67,56 +67,8 @@ export const decrement = (setter: Setter<number>, min = 0, by = 1) => {
   setter(val => (val - by) >= min ? val - by : val)
 }
 
-export const cleanAnimeNameToSearch = (name: string, nyaaReplacement = true) => {
-  const cleanedName = name.replaceAll('"', '').split(/([0-9]+(th|nd))|:/i)[0].replaceAll(/((?<= )(IX|IV|V?I{0,3})(?<! ))([^a-z]+|$)/g, "$3");
-
-  if (!nyaaReplacement) return cleanedName.replaceAll("-", "");
-
-  return cleanedName.split(" ").map(word => {
-    if (word.length > 2 && word.includes("-"))
-      return `("${word}"|"${word.replaceAll("-", "")}"|"${word.replaceAll("-", " ")}")`;
-
-    return word
-  }).join(" ");
-}
-
 export const typedObjectEntries = <T extends object>(obj: T) => {
   return Object.entries(obj) as Array<[keyof T, T[keyof T]]>;
-}
-
-export const removeQuotes = (str: string) => {
-  const start = str[0] === '"' ? 1 : 0;
-  const end = str.length - (str[str.length - 1] === '"' ? 1 : 0);
-
-  return str.substring(start, end)
-}
-
-export const parseCsv = <T extends object>(contents: string) => {
-  const stringToParse = contents.replaceAll("\r\r\n", "\n").replaceAll("\r\n", '\n');
-  const lines = stringToParse.split("\n");
-
-  const headers: string[] = [];
-  const output: T[] = [];
-  let hasParsedHeader = false;
-
-  for (const line of lines) {
-    if (!line.length) continue;
-    const lineItems = line.split(",");
-
-    if (!hasParsedHeader) {
-      headers.push(...lineItems.map(e => removeQuotes(e)));
-      hasParsedHeader = true;
-    } else {
-      const obj: any = {};
-      for (const [index, header] of headers.entries()) {
-        obj[header] = removeQuotes(lineItems[index]);
-      }
-
-      output.push(obj as T)
-    }
-  }
-
-  return output;
 }
 
 export const startWeekdaysFrom = (weekday: Weekday) => {
@@ -167,11 +119,19 @@ export const formatNumber = (num: number | undefined) => {
   return num?.toLocaleString("en-US", { minimumIntegerDigits: 2 })
 }
 
-
 export const countdownToString = (countdown: Countdown | null | undefined): string => {
   if (!notNull(countdown)) return "";
 
   let finalString = `${countdown.days ?? 0 > 0 ? countdown.days + "D" : ""} `;
 
   return finalString + `${formatNumber(countdown.hours)}:${formatNumber(countdown.minutes)}:${formatNumber(countdown.seconds)}`;
+}
+
+export const formatSize = (sizeInBytes: number) => {
+  const output = calculateSizeUnit(sizeInBytes);
+  return `${output.size} ${output.unit}`
+}
+
+export const toLocalString = (time: string | number) => {
+  return (new Date(time)).toLocaleDateString()
 }
